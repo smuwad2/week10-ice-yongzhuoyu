@@ -1,32 +1,33 @@
+/IS216 WAD2/exercises/week10-ice-yujjjia/src/components/subcomponents/TaskTracker.vue
 <script>
-    // TODO: Complete the code
-    export default { 
-        data() {
-            return {
-                
-            }
-        },
-        // Hint: insert properties task (Object) and idx (Number)
-        props: {
-            task: Object,
-            idx: Number,
-        },
-        emits: [
-            "removetask"
-        ]
+export default {
+    props: {
+        tasks: {
+            type: Array,
+            required: true
+        }
+    },
+    methods: {
+        markAsDone(index) {
+            this.$emit('delete-task', index)
+        }
     }
+}
 </script>
 
 <template>
-    <!-- TODO: add your template code here --> 
-   <div class="card" style="width: 18rem; display: inline-block">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Deadline: {{ task.deadline }}</h5>
-    <p class="card-text">{{ task.desc }}</p>
-    <button class="btn btn-primary" @click="$emit('removeTask', idx)">Done</button>
-  </div>
-</div>
+    <div class="row">
+        <div class="col-md-4" v-for="(task, index) in tasks" :key="index">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Deadline: {{ task.deadline }}</h6>
+                    <p class="card-text">{{ task.desc }}</p>
+                    <button type="button" class="btn btn-primary btn-sm" @click="markAsDone(index)">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
-
+<style scoped>
+</style>
